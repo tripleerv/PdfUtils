@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <PackageId>PdfUtils</PackageId>
+        <Version>0.1.0</Version>
+        <Authors>brentfalk</Authors>
+        <Company>Lode King Industries</Company>
+        <PackageDescription>A wrapper for iText</PackageDescription>
+        <RepositoryUrl>https://github.com/tripleerv/PdfUtils.git</RepositoryUrl>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <CodeAnalysisRuleSet>codeanalysis.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+
+        <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.5.0" />
+    </ItemGroup>
+
+</Project>

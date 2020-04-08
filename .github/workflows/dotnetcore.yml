@@ -1,0 +1,35 @@
+name: Build .NET Core
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.201
+    - name: Build with dotnet
+      run: dotnet build
+    - name: Run unit tests
+      run: dotnet test
+    - name: Code analysis
+      run: |
+        dotnet clean
+        dotnet build /p:TreatWarningsAsErrors=true /warnaserror
+    - name: Notify teams on success
+      if: success()
+      uses: toko-bifrost/ms-teams-deploy-card@master
+      with:
+        github-token: ${{ github.token }}
+        webhook-uri: ${{ secrets.TEAMS_CI_SUCCESS_WEBHOOK_URL }}
+    - name: Notify teams on failure
+      if: failure()
+      uses: toko-bifrost/ms-teams-deploy-card@master
+      with:
+        github-token: ${{ github.token }}
+        webhook-uri: ${{ secrets.TEAMS_CI_FAILURE_WEBHOOK_URL }}

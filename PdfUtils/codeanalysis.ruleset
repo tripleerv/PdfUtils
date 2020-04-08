@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Custom Ruleset" Description="Custom Ruleset" ToolsVersion="14.0">
+    <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+        <Rule Id="SA0001" Action="None" />
+        <Rule Id="SA1003" Action="None" />
+        <Rule Id="SA1009" Action="None" />
+        <Rule Id="SA1101" Action="None" />
+        <Rule Id="SA1200" Action="None" />
+        <Rule Id="SA1305" Action="None" />
+        <Rule Id="SA1404" Action="None" /> <!-- Code analysis suppression should have a justification -->
+        <Rule Id="SA1412" Action="None" />
+        <Rule Id="SA1515" Action="None" /> <!-- Single-line comment should be preceded by blank line -->
+        <Rule Id="SA1516" Action="None" /> <!-- Elements should be separated by blank line -->
+        <Rule Id="SA1600" Action="None" />
+        <Rule Id="SA1633" Action="None" />
+    </Rules>
+</RuleSet>
