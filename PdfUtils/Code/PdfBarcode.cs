@@ -10,6 +10,7 @@ namespace Lodeking.PdfUtils
     {
         private string text;
         private int scalePercent = 120;
+        private int hAlign = Element.ALIGN_LEFT;
 
         public PdfBarcode(string text)
         {
@@ -22,19 +23,35 @@ namespace Lodeking.PdfUtils
             return this;
         }
 
+        public PdfBarcode CenterAlign()
+        {
+            this.hAlign = Element.ALIGN_CENTER;
+            return this;
+        }
+
         public override IElement AsIText()
         {
-            Barcode39 bc = new Barcode39
+            var bc = new Barcode39
             {
                 Code = text,
                 AltText = string.Empty,
+                Baseline = 0,
             };
-            bc.Baseline = 0;
+
             var bcImg = bc.CreateImageWithBarcode(Writer.DirectContent, null, null);
             bcImg.ScalePercent(scalePercent);
             bcImg.SpacingAfter = 0;
             bcImg.SpacingBefore = 0;
-            return new Chunk(bcImg, 0, 0, false);
+
+            var chunk = new Chunk(bcImg, 0, 0, false);
+            var paragraph = new Paragraph
+            {
+                Alignment = hAlign,
+            };
+
+            paragraph.Add(chunk);
+
+            return paragraph;
         }
     }
 }

@@ -13,6 +13,8 @@ namespace Lodeking.PdfUtils
         private float rightMargin;
         private float topMargin;
         private float bottomMargin;
+        private float heightInInches = 11;
+        private float widthInInches = 8.5f;
 
         public PdfDocument Margins(float? left = null, float? right = null, float? top = null, float? bottom = null)
         {
@@ -20,6 +22,13 @@ namespace Lodeking.PdfUtils
             this.rightMargin = right ?? 30;
             this.topMargin = top ?? 20;
             this.bottomMargin = bottom ?? 20;
+            return this;
+        }
+
+        public PdfDocument PageSize(float width, float height)
+        {
+            this.widthInInches = width;
+            this.heightInInches = height;
             return this;
         }
 
@@ -32,7 +41,9 @@ namespace Lodeking.PdfUtils
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                var document = new Document(PageSize.Letter, leftMargin, rightMargin, topMargin, bottomMargin);
+                var pagesize = new Rectangle(widthInInches * 72, heightInInches * 72);
+
+                var document = new Document(pagesize, leftMargin, rightMargin, topMargin, bottomMargin);
                 Writer = PdfWriter.GetInstance(document, stream);
                 document.Open();
                 Children.ForEach(child =>

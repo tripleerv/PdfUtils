@@ -1,6 +1,8 @@
 // Copyright (c) Lode King Industries. All rights reserved.
 // Licensed under the MIT License.
 
+using System.IO;
+
 namespace Lodeking.PdfUtils
 {
     public class PdfFactory
@@ -30,9 +32,9 @@ namespace Lodeking.PdfUtils
             return new PdfChunk(text);
         }
 
-        public static PdfElement Barcode(string text)
+        public static PdfBarcode Barcode(string text)
         {
-            return new PdfParagraph().Add(new PdfBarcode(text));
+            return new PdfBarcode(text);
         }
 
         public static PdfTable Table()
@@ -48,6 +50,11 @@ namespace Lodeking.PdfUtils
         public static PdfPageBreak PageBreak()
         {
             return new PdfPageBreak();
+        }
+
+        public static PdfImage Image(FileStream fileStream)
+        {
+            return new PdfImage(fileStream);
         }
     }
 }
